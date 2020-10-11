@@ -1,0 +1,33 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+#left{
+	float: left;
+}
+
+#right{
+	float: right;
+	margin-right: 28%;
+	margin-top: 5%;
+	
+}
+
+.register_account{
+    width: 300px;
+    margin: 0px auto;
+}
+
+.text{
+	display: block;
+	width: 300px;
+	height: 40px;
+	margin-top: 35px;
+	font-size: 10px;
+}
+
+.butten{
+	margin-top: 40px;
+}
+

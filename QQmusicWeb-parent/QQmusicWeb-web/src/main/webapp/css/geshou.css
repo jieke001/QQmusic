@@ -1,0 +1,39 @@
+#a{
+	width: 100%;
+}
+#yuan{
+	width: 13%;
+	height: 13%;
+	border-radius:50% ;
+	float: left;
+	margin-left: 20%;
+}
+.ni{
+	
+	width: 30%;
+	float: left;
+	margin-top: 3%;
+	margin-left: 10%;
+}
+.ni p{
+	font-size: 40px;
+}
+.ni h3{
+	font-size: 25px;
+	display: inline-block;
+}
+h2{
+	width: 160px;
+	height: 27px;
+	display: inline-block;
+	font-size: 20px;
+	border: 1px solid #808080;
+	
+}
+.e{
+	margin-left: 20px;
+}
+.a{
+	background-color:#1AFA88 ;
+	color: #F5F5F9;
+}

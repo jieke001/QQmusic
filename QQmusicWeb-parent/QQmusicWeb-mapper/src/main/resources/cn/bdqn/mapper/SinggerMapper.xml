@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.SinggerMapper" >
+  <resultMap id="BaseResultMap" type="cn.bdqn.domain.Singger" >
+    <id column="s_Id" property="sId" jdbcType="INTEGER" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_PhotoUrl" property="sPhotoUrl" jdbcType="VARCHAR" />
+    <result column="s_region" property="sRegion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    s_Id, s_name, s_PhotoUrl, s_region
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_singger
+    where s_Id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_singger
+    where s_Id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.bdqn.domain.Singger" >
+    insert into t_singger (s_Id, s_name, s_PhotoUrl, 
+      s_region)
+    values (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sPhotourl,jdbcType=VARCHAR}, 
+      #{sRegion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bdqn.domain.Singger" >
+    insert into t_singger
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        s_Id,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sPhotourl != null" >
+        s_PhotoUrl,
+      </if>
+      <if test="sRegion != null" >
+        s_region,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhotourl != null" >
+        #{sPhotourl,jdbcType=VARCHAR},
+      </if>
+      <if test="sRegion != null" >
+        #{sRegion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Singger" >
+    update t_singger
+    <set >
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhotourl != null" >
+        s_PhotoUrl = #{sPhotourl,jdbcType=VARCHAR},
+      </if>
+      <if test="sRegion != null" >
+        s_region = #{sRegion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_Id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Singger" >
+    update t_singger
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_PhotoUrl = #{sPhotourl,jdbcType=VARCHAR},
+      s_region = #{sRegion,jdbcType=VARCHAR}
+    where s_Id = #{sId,jdbcType=INTEGER}
+  </update>
+
+
+  <!--添加歌手信息-->
+  <insert id="insertSingger" parameterType="cn.bdqn.domain.Singger">
+        INSERT into t_singger(s_name,s_PhotoUrl,s_region)
+        VALUES
+        (#{sName},#{sPhotoUrl},#{sRegion})
+  </insert>
+
+  <!--查询所有歌手信息-->
+  <select id="querySinggerList" resultMap="BaseResultMap">
+        SELECT * FROM t_singger
+  </select>
+
+  <!--根据id删除指定歌手的信息-->
+  <delete id="delSinggerId" parameterType="java.lang.Integer">
+        DELETE from t_singger WHERE s_Id = #{id}
+  </delete>
+
+  <!--根据歌手id查询歌手信息-->
+  <select id="querySinggerById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT * FROM t_singger WHERE s_Id = #{sId}
+  </select>
+
+  <!--新增歌手信息-->
+  <insert id="updateSingger" parameterType="cn.bdqn.domain.Singger">
+        UPDATE t_singger set s_name=#{sName},s_PhotoUrl=#{sPhotoUrl},s_region=#{sRegion} WHERE s_Id = #{sId}
+  </insert>
+
+</mapper>

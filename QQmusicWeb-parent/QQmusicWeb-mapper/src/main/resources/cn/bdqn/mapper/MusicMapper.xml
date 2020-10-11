@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.MusicMapper" >
+  <resultMap id="BaseResultMap" type="cn.bdqn.domain.Music" >
+    <id column="m_Id" property="mId" jdbcType="INTEGER" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_PhotoUrl" property="mPhotourl" jdbcType="VARCHAR" />
+    <result column="m_musicUrl" property="mMusicurl" jdbcType="VARCHAR" />
+    <result column="m_TextUrl" property="mTexturl" jdbcType="VARCHAR" />
+    <result column="m_singerId" property="mSingerid" jdbcType="INTEGER" />
+    <result column="m_aid" property="mAid" jdbcType="INTEGER" />
+    <result column="m_VIP" property="mVip" jdbcType="INTEGER" />
+    <result column="m_status" property="mStatus" jdbcType="INTEGER" />
+    <collection property="singgerList" ofType="cn.bdqn.domain.Singger">
+        <result column="s_Id" property="sId"></result>
+        <result column="s_name" property="sName"></result>
+    </collection>
+    <collection property="lbumList" ofType="cn.bdqn.domain.Lbum">
+        <result column="a_id" property="aId"></result>
+        <result column="a_name" property="aName"></result>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    m_Id, m_name, m_PhotoUrl, m_musicUrl, m_TextUrl, m_singerId, m_aid, m_VIP, m_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_music
+    where m_Id = #{mId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_music
+    where m_Id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.bdqn.domain.Music" >
+    insert into t_music (m_Id, m_name, m_PhotoUrl, 
+      m_musicUrl, m_TextUrl, m_singerId, 
+      m_aid, m_VIP, m_status
+      )
+    values (#{mId,jdbcType=INTEGER}, #{mName,jdbcType=VARCHAR}, #{mPhotourl,jdbcType=VARCHAR}, 
+      #{mMusicurl,jdbcType=VARCHAR}, #{mTexturl,jdbcType=VARCHAR}, #{mSingerid,jdbcType=INTEGER}, 
+      #{mAid,jdbcType=INTEGER}, #{mVip,jdbcType=INTEGER}, #{mStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bdqn.domain.Music" >
+    insert into t_music
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_Id,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="mPhotourl != null" >
+        m_PhotoUrl,
+      </if>
+      <if test="mMusicurl != null" >
+        m_musicUrl,
+      </if>
+      <if test="mTexturl != null" >
+        m_TextUrl,
+      </if>
+      <if test="mSingerid != null" >
+        m_singerId,
+      </if>
+      <if test="mAid != null" >
+        m_aid,
+      </if>
+      <if test="mVip != null" >
+        m_VIP,
+      </if>
+      <if test="mStatus != null" >
+        m_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhotourl != null" >
+        #{mPhotourl,jdbcType=VARCHAR},
+      </if>
+      <if test="mMusicurl != null" >
+        #{mMusicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="mTexturl != null" >
+        #{mTexturl,jdbcType=VARCHAR},
+      </if>
+      <if test="mSingerid != null" >
+        #{mSingerid,jdbcType=INTEGER},
+      </if>
+      <if test="mAid != null" >
+        #{mAid,jdbcType=INTEGER},
+      </if>
+      <if test="mVip != null" >
+        #{mVip,jdbcType=INTEGER},
+      </if>
+      <if test="mStatus != null" >
+        #{mStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Music" >
+    update t_music
+    <set >
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhotourl != null" >
+        m_PhotoUrl = #{mPhotourl,jdbcType=VARCHAR},
+      </if>
+      <if test="mMusicurl != null" >
+        m_musicUrl = #{mMusicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="mTexturl != null" >
+        m_TextUrl = #{mTexturl,jdbcType=VARCHAR},
+      </if>
+      <if test="mSingerid != null" >
+        m_singerId = #{mSingerid,jdbcType=INTEGER},
+      </if>
+      <if test="mAid != null" >
+        m_aid = #{mAid,jdbcType=INTEGER},
+      </if>
+      <if test="mVip != null" >
+        m_VIP = #{mVip,jdbcType=INTEGER},
+      </if>
+      <if test="mStatus != null" >
+        m_status = #{mStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where m_Id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Music" >
+    update t_music
+    set m_name = #{mName,jdbcType=VARCHAR},
+      m_PhotoUrl = #{mPhotourl,jdbcType=VARCHAR},
+      m_musicUrl = #{mMusicurl,jdbcType=VARCHAR},
+      m_TextUrl = #{mTexturl,jdbcType=VARCHAR},
+      m_singerId = #{mSingerid,jdbcType=INTEGER},
+      m_aid = #{mAid,jdbcType=INTEGER},
+      m_VIP = #{mVip,jdbcType=INTEGER},
+      m_status = #{mStatus,jdbcType=INTEGER}
+    where m_Id = #{mId,jdbcType=INTEGER}
+  </update>
+
+  <!--查询所有音乐-->
+  <select id="queryMusicList" resultMap="BaseResultMap">
+        select m.m_Id,m.m_name,m.m_musicUrl,m.m_TextUrl,m.m_PhotoUrl,t.s_Id,t.s_name,a.a_id,a.a_name from t_music m
+    INNER JOIN t_singger t on t.s_Id=m.m_singerId
+    INNER JOIN t_album a on a.a_id=m.m_aid
+  </select>
+
+  <!--添加新的歌曲-->
+  <insert id="addMusic" parameterType="cn.bdqn.domain.Music">
+        INSERT into t_music(m_name,m_PhotoUrl,m_musicUrl,m_TextUrl,m_singerId,m_aid,m_VIP)
+        VALUES(#{mName},#{mPhotourl},#{mMusicurl},#{mTexturl},#{mSingerid},#{mAid},#{mVip})
+  </insert>
+
+  <!--根据歌曲id查询歌曲-->
+  <select id="queryMusicById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select * from t_music WHERE m_Id = #{mId}
+  </select>
+
+  <!--修改歌曲-->
+  <update id="updateMusic" parameterType="cn.bdqn.domain.Music">
+        UPDATE t_music set m_name = #{mName},m_PhotoUrl=#{mPhotourl},m_musicUrl=#{mMusicurl},m_TextUrl=#{mTexturl},m_singerId=#{mSingerid},m_aid=#{mAid},m_VIP=#{mVip} WHERE m_Id= #{mId}
+  </update>
+
+  <!--根据歌曲id删除音乐-->
+  <delete id="delMusicById" parameterType="java.lang.Integer">
+        delete from t_music WHERE m_Id = #{mId}
+  </delete>
+
+</mapper>

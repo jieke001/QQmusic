@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.CollectMapper">
+    <resultMap id="BaseResultMap" type="cn.bdqn.domain.Collect">
+        <id column="c_id" property="cId" jdbcType="INTEGER"/>
+        <result column="c_uid" property="cUid" jdbcType="INTEGER"/>
+        <result column="c_mid" property="cMid" jdbcType="INTEGER"/>
+        <result column="c_sid" property="cSid" jdbcType="INTEGER"/>
+        <result column="c_aid" property="cAid" jdbcType="INTEGER"/>
+        <collection property="singgerList" ofType="cn.bdqn.domain.Singger">
+            <result column="s_Id" property="sId"></result>
+            <result column="s_name" property="sName"></result>
+        </collection>
+        <collection property="musicList" ofType="cn.bdqn.domain.Music">
+            <result column="m_Id" property="mId"></result>
+            <result column="m_name" property="mName"></result>
+        </collection>
+        <collection property="lbumList" ofType="cn.bdqn.domain.Lbum">
+            <result column="a_id" property="aId"></result>
+            <result column="a_name" property="aName"></result>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+    c_id, c_uid, c_mid, c_sid, c_aid
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_collect
+        where c_id = #{cId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_collect
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.bdqn.domain.Collect">
+    insert into t_collect (c_id, c_uid, c_mid, 
+      c_sid, c_aid)
+    values (#{cId,jdbcType=INTEGER}, #{cUid,jdbcType=INTEGER}, #{cMid,jdbcType=INTEGER}, 
+      #{cSid,jdbcType=INTEGER}, #{cAid,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.bdqn.domain.Collect">
+        insert into t_collect
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                c_id,
+            </if>
+            <if test="cUid != null">
+                c_uid,
+            </if>
+            <if test="cMid != null">
+                c_mid,
+            </if>
+            <if test="cSid != null">
+                c_sid,
+            </if>
+            <if test="cAid != null">
+                c_aid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cId != null">
+                #{cId,jdbcType=INTEGER},
+            </if>
+            <if test="cUid != null">
+                #{cUid,jdbcType=INTEGER},
+            </if>
+            <if test="cMid != null">
+                #{cMid,jdbcType=INTEGER},
+            </if>
+            <if test="cSid != null">
+                #{cSid,jdbcType=INTEGER},
+            </if>
+            <if test="cAid != null">
+                #{cAid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Collect">
+        update t_collect
+        <set>
+            <if test="cUid != null">
+                c_uid = #{cUid,jdbcType=INTEGER},
+            </if>
+            <if test="cMid != null">
+                c_mid = #{cMid,jdbcType=INTEGER},
+            </if>
+            <if test="cSid != null">
+                c_sid = #{cSid,jdbcType=INTEGER},
+            </if>
+            <if test="cAid != null">
+                c_aid = #{cAid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where c_id = #{cId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Collect">
+    update t_collect
+    set c_uid = #{cUid,jdbcType=INTEGER},
+      c_mid = #{cMid,jdbcType=INTEGER},
+      c_sid = #{cSid,jdbcType=INTEGER},
+      c_aid = #{cAid,jdbcType=INTEGER}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+
+    <!--查询是否存在此歌曲-->
+    <select id="queryByUidMidSid" resultType="java.lang.Integer" parameterType="cn.bdqn.domain.Collect">
+             select count(c_id) as num FROM t_collect WHERE c_uid=#{cUid} AND c_mid=#{cMid} AND c_sid = #{cSid}
+    </select>
+
+    <!--新增收藏-->
+    <insert id="addByCollect" parameterType="cn.bdqn.domain.Collect">
+        insert into t_collect(c_uid,c_sid,c_mid,c_aid)
+        values (#{cUid},#{cMid},#{cSid},#{cAid})
+  </insert>
+
+    <!--查询用户下所有收藏-->
+    <select id="queryCollectList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT c.c_id,s.s_Id,s.s_name,m.m_Id,m.m_name,a.a_id,a.a_name FROM t_collect as c
+        INNER JOIN t_singger as s ON s.s_Id = c.c_sid
+        INNER JOIN t_music as m ON m.m_Id = c.c_mid
+        INNER JOIN t_album as a ON a.a_id = c.c_aid
+        WHERE c.c_uid = #{uId}
+    </select>
+
+</mapper>

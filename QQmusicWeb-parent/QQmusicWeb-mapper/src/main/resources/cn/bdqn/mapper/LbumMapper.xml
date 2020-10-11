@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.LbumMapper" >
+  <resultMap id="BaseResultMap" type="cn.bdqn.domain.Lbum" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+    <result column="a_sid" property="aSid" jdbcType="INTEGER" />
+    <result column="a_url" property="aUrl" jdbcType="VARCHAR" />
+    <collection property="singgerList" ofType="cn.bdqn.domain.Singger">
+        <result column="s_Id" property="sId"></result>
+        <result column="s_name" property="sName"></result>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a_id, a_name, a_sid, a_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_album
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_album
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.bdqn.domain.Lbum" >
+    insert into t_album (a_id, a_name, a_sid, 
+      a_url)
+    values (#{aId,jdbcType=INTEGER}, #{aName,jdbcType=VARCHAR}, #{aSid,jdbcType=INTEGER}, 
+      #{aUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bdqn.domain.Lbum" >
+    insert into t_album
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        a_id,
+      </if>
+      <if test="aName != null" >
+        a_name,
+      </if>
+      <if test="aSid != null" >
+        a_sid,
+      </if>
+      <if test="aUrl != null" >
+        a_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aName != null" >
+        #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aSid != null" >
+        #{aSid,jdbcType=INTEGER},
+      </if>
+      <if test="aUrl != null" >
+        #{aUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Lbum" >
+    update t_album
+    <set >
+      <if test="aName != null" >
+        a_name = #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aSid != null" >
+        a_sid = #{aSid,jdbcType=INTEGER},
+      </if>
+      <if test="aUrl != null" >
+        a_url = #{aUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Lbum" >
+    update t_album
+    set a_name = #{aName,jdbcType=VARCHAR},
+      a_sid = #{aSid,jdbcType=INTEGER},
+      a_url = #{aUrl,jdbcType=VARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+
+  <!--关联歌手表查询歌手名字和所有专辑-->
+  <select id="queryLbumList" resultMap="BaseResultMap">
+        SELECT t_a.a_id,t_s.s_name,t_a.a_name FROM t_album t_a,t_singger t_s
+        WHERE t_a.a_sid=t_s.s_Id
+  </select>
+
+  <!--添加新的专辑-->
+  <insert id="addLbum" parameterType="cn.bdqn.domain.Lbum">
+        INSERT into t_album(a_name,a_sid,a_url)
+        VALUES(#{aName},#{aSid},#{aUrl})
+  </insert>
+
+  <!--根据专辑id查询专辑信息-->
+  <select id="queryLbumById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT * FROM t_album WHERE a_id = #{aId}
+  </select>
+
+  <!--修改专辑信息-->
+  <update id="updateLbum" parameterType="cn.bdqn.domain.Lbum">
+        UPDATE t_album set a_name=#{aName},a_sid=#{aSid},a_url=#{aUrl} WHERE a_id = #{aId}
+  </update>
+
+  <!--根据专辑id删除专辑-->
+  <delete id="delLbumById" parameterType="java.lang.Integer">
+        delete from t_album where a_id = #{aId}
+  </delete>
+
+</mapper>

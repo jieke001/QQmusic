@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.ViptypeMapper" >
+  <resultMap id="BaseResultMap" type="cn.bdqn.domain.Viptype" >
+    <id column="v_Id" property="vId" jdbcType="INTEGER" />
+    <result column="v_name" property="vName" jdbcType="VARCHAR" />
+    <result column="v_Time" property="vTime" jdbcType="INTEGER" />
+    <result column="v_price" property="vPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    v_Id, v_name, v_Time, v_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_viptype
+    where v_Id = #{vId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_viptype
+    where v_Id = #{vId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.bdqn.domain.Viptype" >
+    insert into t_viptype (v_Id, v_name, v_Time, 
+      v_price)
+    values (#{vId,jdbcType=INTEGER}, #{vName,jdbcType=VARCHAR}, #{vTime,jdbcType=INTEGER}, 
+      #{vPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bdqn.domain.Viptype" >
+    insert into t_viptype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vId != null" >
+        v_Id,
+      </if>
+      <if test="vName != null" >
+        v_name,
+      </if>
+      <if test="vTime != null" >
+        v_Time,
+      </if>
+      <if test="vPrice != null" >
+        v_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vId != null" >
+        #{vId,jdbcType=INTEGER},
+      </if>
+      <if test="vName != null" >
+        #{vName,jdbcType=VARCHAR},
+      </if>
+      <if test="vTime != null" >
+        #{vTime,jdbcType=INTEGER},
+      </if>
+      <if test="vPrice != null" >
+        #{vPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Viptype" >
+    update t_viptype
+    <set >
+      <if test="vName != null" >
+        v_name = #{vName,jdbcType=VARCHAR},
+      </if>
+      <if test="vTime != null" >
+        v_Time = #{vTime,jdbcType=INTEGER},
+      </if>
+      <if test="vPrice != null" >
+        v_price = #{vPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where v_Id = #{vId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Viptype" >
+    update t_viptype
+    set v_name = #{vName,jdbcType=VARCHAR},
+      v_Time = #{vTime,jdbcType=INTEGER},
+      v_price = #{vPrice,jdbcType=DECIMAL}
+    where v_Id = #{vId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,156 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.mod_header {
+    margin: 0px auto;
+    width: 86%;
+
+}
+
+.nva-img {
+    float: left;
+}
+
+.nva-img h1 a {
+    display: block;
+    margin: 11% 0px;
+}
+
+.nva {
+    width: 96%;
+    margin: 0px auto;
+    float: left;
+}
+
+.nva #list li {
+    float: left;
+    padding: 23px 1px 23px;
+}
+
+.nva #list li a:hover {
+    color: #31C27C;
+}
+
+.nva #list li:nth-child(1) {
+    margin-left: 20px;
+    background-color: #31C27C;
+    color: white;
+}
+
+.nva #list li:nth-child(1) a {
+    color: white;
+}
+
+.nva #list li:nth-child(7) a:hover {
+    color: #31C27C;
+}
+
+.nva #list li:nth-child(6) {
+    margin-left: 25px;
+}
+
+.nva #list li:nth-child(7) a {
+    color: black;
+}
+
+.nva #list li a {
+    line-height: 40px;
+    padding: 0px 17px;
+    display: block;
+    font-size: 18px;
+}
+
+.nva #list li:nth-child(5) a {
+    font-size: 16px;
+}
+
+.nva #list li:nth-child(7) a {
+    font-size: 16px;
+}
+
+.nva #list li:nth-child(9) {
+    margin: auto 10px;
+}
+
+.nva #list li:nth-child(8) a {
+    font-size: 13px;
+    line-height: 39px;
+    background-color: #31C27C;
+    color: white;
+}
+
+.nva #list li:nth-child(9) a {
+    font-size: 13px;
+    border: 1px solid #C9C9C9;
+    line-height: 39px;
+}
+
+.nva #list li input {
+    padding: 0px 25px 0px 10px;
+    line-height: 35px;
+}
+
+.nva2 {
+    clear: left;
+    margin: 0px auto;
+    width: 67%;
+}
+
+.nva2 li {
+    margin: 0px auto;
+    width: 8.2%;
+    float: left;
+    padding: 0px 7px;
+}
+
+.nva2 li a {
+    display: block;
+    line-height: 10px;
+    padding: 20px 0px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.nva2 li a:hover {
+    color: #31C27C;
+}
+
+.nva #list li .khd {
+    position: absolute;
+    left: 23%;
+    clear: left;
+    border: 1px solid #CDCDCD;
+    line-height: 35px;
+    background-color: #FDFFFB;
+    color: black;
+    display: none;
+}
+
+.nva #list li .khd dt {
+    padding: 0px 20px 0px 35px;
+    font-size: 11px;
+}
+
+.nva #list li .khd dt a {
+    font-size: 12px;
+    display: block;
+    line-height: 23px;
+    text-align: center;
+    margin: 9px 0px;
+    color: white;
+    background-color: #0AD06E;
+}
+
+.nva #list li .khd dt a:hover {
+    background-color: #04A958;
+}

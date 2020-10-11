@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.MusiclistMapper" >
+  <resultMap id="BaseResultMap" type="cn.bdqn.domain.Musiclist" >
+    <id column="m_id" property="mId" jdbcType="INTEGER" />
+    <result column="m_uid" property="mUid" jdbcType="INTEGER" />
+    <result column="m_mid" property="mMid" jdbcType="INTEGER" />
+    <result column="m_sid" property="mSid" jdbcType="INTEGER" />
+    <result column="m_tid" property="mTid" jdbcType="INTEGER" />
+    <result column="m_mname" property="mMname" jdbcType="VARCHAR" />
+    <result column="m_sname" property="mSname" jdbcType="VARCHAR" />
+    <result column="m_tname" property="mTname" jdbcType="VARCHAR" />
+    <result column="m_aid" property="mAid" jdbcType="INTEGER" />
+    <result column="m_aname" property="mAname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    m_id, m_uid, m_mid, m_sid, m_tid, m_mname, m_sname, m_tname, m_aid, m_aname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_musiclist
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_musiclist
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.bdqn.domain.Musiclist" >
+    insert into t_musiclist (m_id, m_uid, m_mid, 
+      m_sid, m_tid, m_mname, 
+      m_sname, m_tname, m_aid, 
+      m_aname)
+    values (#{mId,jdbcType=INTEGER}, #{mUid,jdbcType=INTEGER}, #{mMid,jdbcType=INTEGER}, 
+      #{mSid,jdbcType=INTEGER}, #{mTid,jdbcType=INTEGER}, #{mMname,jdbcType=VARCHAR}, 
+      #{mSname,jdbcType=VARCHAR}, #{mTname,jdbcType=VARCHAR}, #{mAid,jdbcType=INTEGER}, 
+      #{mAname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bdqn.domain.Musiclist" >
+    insert into t_musiclist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="mUid != null" >
+        m_uid,
+      </if>
+      <if test="mMid != null" >
+        m_mid,
+      </if>
+      <if test="mSid != null" >
+        m_sid,
+      </if>
+      <if test="mTid != null" >
+        m_tid,
+      </if>
+      <if test="mMname != null" >
+        m_mname,
+      </if>
+      <if test="mSname != null" >
+        m_sname,
+      </if>
+      <if test="mTname != null" >
+        m_tname,
+      </if>
+      <if test="mAid != null" >
+        m_aid,
+      </if>
+      <if test="mAname != null" >
+        m_aname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="mUid != null" >
+        #{mUid,jdbcType=INTEGER},
+      </if>
+      <if test="mMid != null" >
+        #{mMid,jdbcType=INTEGER},
+      </if>
+      <if test="mSid != null" >
+        #{mSid,jdbcType=INTEGER},
+      </if>
+      <if test="mTid != null" >
+        #{mTid,jdbcType=INTEGER},
+      </if>
+      <if test="mMname != null" >
+        #{mMname,jdbcType=VARCHAR},
+      </if>
+      <if test="mSname != null" >
+        #{mSname,jdbcType=VARCHAR},
+      </if>
+      <if test="mTname != null" >
+        #{mTname,jdbcType=VARCHAR},
+      </if>
+      <if test="mAid != null" >
+        #{mAid,jdbcType=INTEGER},
+      </if>
+      <if test="mAname != null" >
+        #{mAname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Musiclist" >
+    update t_musiclist
+    <set >
+      <if test="mUid != null" >
+        m_uid = #{mUid,jdbcType=INTEGER},
+      </if>
+      <if test="mMid != null" >
+        m_mid = #{mMid,jdbcType=INTEGER},
+      </if>
+      <if test="mSid != null" >
+        m_sid = #{mSid,jdbcType=INTEGER},
+      </if>
+      <if test="mTid != null" >
+        m_tid = #{mTid,jdbcType=INTEGER},
+      </if>
+      <if test="mMname != null" >
+        m_mname = #{mMname,jdbcType=VARCHAR},
+      </if>
+      <if test="mSname != null" >
+        m_sname = #{mSname,jdbcType=VARCHAR},
+      </if>
+      <if test="mTname != null" >
+        m_tname = #{mTname,jdbcType=VARCHAR},
+      </if>
+      <if test="mAid != null" >
+        m_aid = #{mAid,jdbcType=INTEGER},
+      </if>
+      <if test="mAname != null" >
+        m_aname = #{mAname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Musiclist" >
+    update t_musiclist
+    set m_uid = #{mUid,jdbcType=INTEGER},
+      m_mid = #{mMid,jdbcType=INTEGER},
+      m_sid = #{mSid,jdbcType=INTEGER},
+      m_tid = #{mTid,jdbcType=INTEGER},
+      m_mname = #{mMname,jdbcType=VARCHAR},
+      m_sname = #{mSname,jdbcType=VARCHAR},
+      m_tname = #{mTname,jdbcType=VARCHAR},
+      m_aid = #{mAid,jdbcType=INTEGER},
+      m_aname = #{mAname,jdbcType=VARCHAR}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+</mapper>

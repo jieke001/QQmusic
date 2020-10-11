@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="cn.bdqn.domain.Users" >
+    <id column="u_Id" property="uId" jdbcType="INTEGER" />
+    <result column="u_number" property="uNumber" jdbcType="VARCHAR" />
+    <result column="u_name" property="uName" jdbcType="VARCHAR" />
+    <result column="u_pwd" property="uPwd" jdbcType="VARCHAR" />
+    <result column="u_sex" property="uSex" jdbcType="CHAR" />
+    <result column="u_born" property="uBorn" jdbcType="TIMESTAMP" />
+    <result column="u_VIPid" property="uVipid" jdbcType="INTEGER" />
+    <result column="u_registerTime" property="uRegistertime" jdbcType="TIMESTAMP" />
+    <result column="u_photoUrl" property="uPhotourl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    u_Id, u_number, u_name, u_pwd, u_sex, u_born, u_VIPid, u_registerTime, u_photoUrl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_users
+    where u_Id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_users
+    where u_Id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.bdqn.domain.Users" >
+    insert into t_users (u_Id, u_number, u_name, 
+      u_pwd, u_sex, u_born, u_VIPid, 
+      u_registerTime, u_photoUrl)
+    values (#{uId,jdbcType=INTEGER}, #{uNumber,jdbcType=VARCHAR}, #{uName,jdbcType=VARCHAR}, 
+      #{uPwd,jdbcType=VARCHAR}, #{uSex,jdbcType=CHAR}, #{uBorn,jdbcType=TIMESTAMP}, #{uVipid,jdbcType=INTEGER}, 
+      #{uRegistertime,jdbcType=TIMESTAMP}, #{uPhotourl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bdqn.domain.Users" >
+    insert into t_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_Id,
+      </if>
+      <if test="uNumber != null" >
+        u_number,
+      </if>
+      <if test="uName != null" >
+        u_name,
+      </if>
+      <if test="uPwd != null" >
+        u_pwd,
+      </if>
+      <if test="uSex != null" >
+        u_sex,
+      </if>
+      <if test="uBorn != null" >
+        u_born,
+      </if>
+      <if test="uVipid != null" >
+        u_VIPid,
+      </if>
+      <if test="uRegistertime != null" >
+        u_registerTime,
+      </if>
+      <if test="uPhotourl != null" >
+        u_photoUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uNumber != null" >
+        #{uNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPwd != null" >
+        #{uPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null" >
+        #{uSex,jdbcType=CHAR},
+      </if>
+      <if test="uBorn != null" >
+        #{uBorn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uVipid != null" >
+        #{uVipid,jdbcType=INTEGER},
+      </if>
+      <if test="uRegistertime != null" >
+        #{uRegistertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uPhotourl != null" >
+        #{uPhotourl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bdqn.domain.Users" >
+    update t_users
+    <set >
+      <if test="uNumber != null" >
+        u_number = #{uNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPwd != null" >
+        u_pwd = #{uPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null" >
+        u_sex = #{uSex,jdbcType=CHAR},
+      </if>
+      <if test="uBorn != null" >
+        u_born = #{uBorn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uVipid != null" >
+        u_VIPid = #{uVipid,jdbcType=INTEGER},
+      </if>
+      <if test="uRegistertime != null" >
+        u_registerTime = #{uRegistertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uPhotourl != null" >
+        u_photoUrl = #{uPhotourl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_Id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bdqn.domain.Users" >
+    update t_users
+    set u_number = #{uNumber,jdbcType=VARCHAR},
+      u_name = #{uName,jdbcType=VARCHAR},
+      u_pwd = #{uPwd,jdbcType=VARCHAR},
+      u_sex = #{uSex,jdbcType=CHAR},
+      u_born = #{uBorn,jdbcType=TIMESTAMP},
+      u_VIPid = #{uVipid,jdbcType=INTEGER},
+      u_registerTime = #{uRegistertime,jdbcType=TIMESTAMP},
+      u_photoUrl = #{uPhotourl,jdbcType=VARCHAR}
+    where u_Id = #{uId,jdbcType=INTEGER}
+  </update>
+
+  <!--查询用户账号密码-->
+  <select id="selectByUsernameAndPassword" resultMap="BaseResultMap">
+        select * from t_users
+        where u_name = #{uName} and u_pwd = #{uPwd}
+    </select>
+
+</mapper>

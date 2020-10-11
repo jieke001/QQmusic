@@ -1,0 +1,53 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#whole {
+	width: 200px;
+	height: 240px;
+	margin:10px auto 10px;
+	background: no-repeat;
+	background-size: 100% auto;
+}
+
+#whole3{
+	margin: 0px auto 10px;
+	width: 30%;
+	text-align: center;
+	line-height: 25px;
+	color: #9A9FA2;
+}
+
+.lrc {
+	width: 300px;
+	height: 300px;
+	margin: auto;
+	line-height:30px;
+	overflow:hidden;
+}
+
+#content{
+	position:relative;
+	top:0px;
+	text-align:center;
+	color:#9A9FA2;
+}
+
+#myMusic {
+	width: 300px;
+	margin: 0px auto;
+}
+
+#imgMain{
+	position: absolute;
+	left: 30px;
+}
+
+#return{
+	height: 30px;
+	padding-top:10px ;
+	position: relative;
+	top: 6px;
+	background-color: #393D49;
+}
